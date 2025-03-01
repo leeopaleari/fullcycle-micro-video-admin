@@ -26,6 +26,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "Orta.vscode-jest",
+        "firsttris.vscode-jest-runner",
         "ms-vscode.js-debug",
         "vscode.git",
         "formulahendry.docker-extension-pack"
