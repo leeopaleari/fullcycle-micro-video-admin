@@ -31,15 +31,21 @@ export class Category {
   }
 
   static create(props: CategoryCreateCommand): Category {
-    return new Category(props);
+    const category = new Category(props);
+
+    Category.validate(category);
+
+    return category;
   }
 
   changeName(newName: string): void {
     this.name = newName;
+    Category.validate(this);
   }
 
   changeDescription(newDescription: string | null): void {
     this.description = newDescription;
+    Category.validate(this);
   }
 
   activate() {
