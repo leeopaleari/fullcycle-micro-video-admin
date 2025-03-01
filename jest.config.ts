@@ -5,6 +5,9 @@
 
 import type { Config } from "jest";
 
+const fs = require("fs");
+
+const swrcConfig = JSON.parse(fs.readFileSync(`${__dirname}/.swcrc`, "utf-8"));
 const config: Config = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -176,7 +179,10 @@ const config: Config = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    "^.+\\.(t|j)sx?$": "@swc/jest",
+    "^.+\\.(t|j)sx?$": [
+      "@swc/jest",
+      { ...swrcConfig /* custom configuration in Jest */ },
+    ],
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
