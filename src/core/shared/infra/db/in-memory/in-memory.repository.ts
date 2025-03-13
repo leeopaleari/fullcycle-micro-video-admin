@@ -1,4 +1,5 @@
 import { Entity } from "@core/shared/domain/entity";
+import { NotFoundError } from "@core/shared/domain/errors/not-found.error";
 import { IRepository } from "@core/shared/domain/repository/repository.interface";
 import { ValueObject } from "@core/shared/domain/value-object";
 
@@ -12,6 +13,7 @@ export abstract class InMemoryRepository<
   async insert(entity: E): Promise<void> {
     this.items.push(entity);
   }
+
   async bulkInsert(entities: E[]): Promise<void> {
     this.items.push(...entities);
   }
@@ -22,7 +24,7 @@ export abstract class InMemoryRepository<
     );
 
     if (indexFound === -1) {
-      throw new Error("Entity not found");
+      throw new NotFoundError(entity.entityId, this.getEntity());
     }
 
     this.items[indexFound] = entity;
@@ -34,7 +36,7 @@ export abstract class InMemoryRepository<
     );
 
     if (indexFound === -1) {
-      throw new Error("Entity not found");
+      throw new NotFoundError(entityId, this.getEntity());
     }
 
     this.items.splice(indexFound, 1);
