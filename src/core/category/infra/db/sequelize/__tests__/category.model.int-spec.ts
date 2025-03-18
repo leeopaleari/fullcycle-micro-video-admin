@@ -1,26 +1,71 @@
-import { Sequelize } from "sequelize-typescript";
+import { DataType, Sequelize } from "sequelize-typescript";
 import { CategoryModel } from "../category.model";
-import { Category } from "@core/category/domain/category.entity";
 
 describe('CategoryModel Integration Test', () => {
-  it('should create a category', async () => {
-    const sequelize = new Sequelize({
+  let sequelize;
+
+  beforeEach(async () => {
+    sequelize = new Sequelize({
       dialect: "sqlite",
       storage: ":memory:",
-      models: [CategoryModel]
+      models: [CategoryModel],
+      logging: false
     });
 
     await sequelize.sync({ force: true });
+  })
 
-    const category = Category.fake().aCategory().build();
+  test('mapping props', () => {
+    const attributesMap = CategoryModel.getAttributes();
+    const attributes = Object.keys(attributesMap)
 
-    CategoryModel.create({
-      categoryId: category.categoryId.id as any,
-      name: category.name,
-      isActive: category.isActive,
-      description: category.description,
-      createdAt: category.createdAt
+    expect(attributes).toStrictEqual([
+      "categoryId",
+      "name",
+      "description",
+      "isActive",
+      "createdAt",
+      "updatedAt"
+    ])
+
+    const categoryIdAttr = attributesMap.categoryId;
+    expect(categoryIdAttr).toMatchObject({
+      field: "categoryId",
+      fieldName: "categoryId",
+      type: DataType.UUID(),
+      primaryKey: true
     })
 
-  });
+    const nameAttr = attributesMap.name;
+    expect(nameAttr).toMatchObject({
+      field: "name",
+      fieldName: "name",
+      type: DataType.STRING(255),
+      allowNull: false
+    })
+
+    const descriptionAttr = attributesMap.description;
+    expect(descriptionAttr).toMatchObject({
+      field: "description",
+      fieldName: "description",
+      type: DataType.TEXT(),
+      allowNull: true
+    });
+
+    const isActiveAttr = attributesMap.isActive;
+    expect(isActiveAttr).toMatchObject({
+      field: "isActive",
+      fieldName: "isActive",
+      type: DataType.BOOLEAN(),
+      allowNull: false
+    });
+
+    const createdAtAttr = attributesMap.createdAt;
+    expect(createdAtAttr).toMatchObject({
+      field: "createdAt",
+      fieldName: "createdAt",
+      type: DataType.DATE(3),
+      allowNull: false
+    });
+  })
 })
