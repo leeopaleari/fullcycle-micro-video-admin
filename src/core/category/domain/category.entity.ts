@@ -1,10 +1,9 @@
-import { EntityValidationError } from "@core/shared/domain/validators/validation.error";
-
-import { CategoryValidatorFactory } from "./category.validator";
-import { Entity } from "@core/shared/domain/entity";
-import { ValueObject } from "@core/shared/domain/value-object";
-import { Uuid } from "@core/shared/domain/value-objects/uuid.vo";
+import { Entity } from "../../shared/domain/entity";
+import { EntityValidationError } from "../../shared/domain/validators/validation.error";
+import { ValueObject } from "../../shared/domain/value-object";
+import { Uuid } from "../../shared/domain/value-objects/uuid.vo";
 import { CategoryFakeBuilder } from "./category-fake.builder";
+import { CategoryValidatorFactory } from "./category.validator";
 
 export type CategoryConstructorProps = {
   categoryId?: Uuid;
@@ -29,8 +28,7 @@ export class Category extends Entity {
 
   constructor(props: CategoryConstructorProps) {
     super();
-
-    this.categoryId = props.categoryId || new Uuid();
+    this.categoryId = props.categoryId ?? new Uuid();
     this.name = props.name;
     this.description = props.description ?? null;
     this.isActive = props.isActive ?? true;
@@ -43,19 +41,17 @@ export class Category extends Entity {
 
   static create(props: CategoryCreateCommand): Category {
     const category = new Category(props);
-
     Category.validate(category);
-
     return category;
   }
 
-  changeName(newName: string): void {
-    this.name = newName;
+  changeName(name: string): void {
+    this.name = name;
     Category.validate(this);
   }
 
-  changeDescription(newDescription: string | null): void {
-    this.description = newDescription;
+  changeDescription(description: string): void {
+    this.description = description;
     Category.validate(this);
   }
 

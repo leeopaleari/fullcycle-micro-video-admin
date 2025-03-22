@@ -1,8 +1,20 @@
-import { Category } from "@core/category/domain/category.entity";
-import { Column, DataType, Model, PrimaryKey, Table } from "sequelize-typescript";
+import {
+  Column,
+  DataType,
+  Model,
+  PrimaryKey,
+  Table,
+} from "sequelize-typescript";
 
+export type CategoryModelProps = {
+  categoryId: string;
+  name: string;
+  description: string | null;
+  isActive: boolean;
+  createdAt: Date;
+};
 @Table({ tableName: "categories" })
-export class CategoryModel extends Model<Category> {
+export class CategoryModel extends Model<CategoryModelProps> {
   @PrimaryKey
   @Column({ type: DataType.UUID })
   declare categoryId: string;
