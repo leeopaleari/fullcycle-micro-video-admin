@@ -38,8 +38,13 @@ export class Config {
     }
 
     const { parsed } = readEnv({
-      path: join(__dirname, `../../../../envs/.env.${process.env.NODE_ENV}`),
+      path: join(process.cwd(), `envs/.env.${process.env.NODE_ENV}`),
+      // path: join(__dirname, `../../../../envs/.env.${process.env.NODE_ENV}`),
     });
+
+    if (!parsed) {
+      throw new Error("Failed to load environment variables");
+    }
 
     Config.env = {
       ...parsed,

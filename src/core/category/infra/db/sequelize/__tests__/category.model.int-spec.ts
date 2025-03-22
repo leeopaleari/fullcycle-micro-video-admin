@@ -1,23 +1,13 @@
-import { DataType, Sequelize } from "sequelize-typescript";
+import { setupSequelize } from "@core/shared/infra/testing/helpers";
+import { DataType } from "sequelize-typescript";
 import { CategoryModel } from "../category.model";
 
-describe('CategoryModel Integration Test', () => {
-  let sequelize;
+describe("CategoryModel Integration Test", () => {
+  setupSequelize({ models: [CategoryModel] });
 
-  beforeEach(async () => {
-    sequelize = new Sequelize({
-      dialect: "sqlite",
-      storage: ":memory:",
-      models: [CategoryModel],
-      logging: false
-    });
-
-    await sequelize.sync({ force: true });
-  })
-
-  test('mapping props', () => {
+  test("mapping props", () => {
     const attributesMap = CategoryModel.getAttributes();
-    const attributes = Object.keys(attributesMap)
+    const attributes = Object.keys(attributesMap);
 
     expect(attributes).toStrictEqual([
       "categoryId",
@@ -25,31 +15,31 @@ describe('CategoryModel Integration Test', () => {
       "description",
       "isActive",
       "createdAt",
-      "updatedAt"
-    ])
+      "updatedAt",
+    ]);
 
     const categoryIdAttr = attributesMap.categoryId;
     expect(categoryIdAttr).toMatchObject({
       field: "categoryId",
       fieldName: "categoryId",
       type: DataType.UUID(),
-      primaryKey: true
-    })
+      primaryKey: true,
+    });
 
     const nameAttr = attributesMap.name;
     expect(nameAttr).toMatchObject({
       field: "name",
       fieldName: "name",
       type: DataType.STRING(255),
-      allowNull: false
-    })
+      allowNull: false,
+    });
 
     const descriptionAttr = attributesMap.description;
     expect(descriptionAttr).toMatchObject({
       field: "description",
       fieldName: "description",
       type: DataType.TEXT(),
-      allowNull: true
+      allowNull: true,
     });
 
     const isActiveAttr = attributesMap.isActive;
@@ -57,7 +47,7 @@ describe('CategoryModel Integration Test', () => {
       field: "isActive",
       fieldName: "isActive",
       type: DataType.BOOLEAN(),
-      allowNull: false
+      allowNull: false,
     });
 
     const createdAtAttr = attributesMap.createdAt;
@@ -65,7 +55,7 @@ describe('CategoryModel Integration Test', () => {
       field: "createdAt",
       fieldName: "createdAt",
       type: DataType.DATE(3),
-      allowNull: false
+      allowNull: false,
     });
-  })
-})
+  });
+});
