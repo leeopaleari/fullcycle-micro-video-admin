@@ -1,6 +1,6 @@
 import { Chance } from "chance";
-import { Category } from "./category.entity";
 import { Uuid } from "../../shared/domain/value-objects/uuid.vo";
+import { Category } from "./category.entity";
 
 type PropOrFactory<T> = T | ((index: number) => T);
 
@@ -84,10 +84,10 @@ export class CategoryFakeBuilder<TBuild = any> {
             createdAt: this.callFactory(this._createdAt, index),
           }),
         });
-        // category.validate();
+        category.validate();
         return category;
       });
-    return this.countObjs === 1 ? (categories[0] as any) : categories as any;
+    return this.countObjs === 1 ? (categories[0] as any) : (categories as any);
   }
 
   get categoryId() {
