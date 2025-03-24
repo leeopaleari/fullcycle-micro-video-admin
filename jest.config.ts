@@ -37,7 +37,10 @@ const config: Config = {
   coverageDirectory: "<rootDir>/../coverage",
 
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: ["/node_modules/"],
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "/core/shared/infra/config.ts",
+  ],
   // Indicates which provider should be used to instrument code for coverage
   // coverageProvider: "babel",
 

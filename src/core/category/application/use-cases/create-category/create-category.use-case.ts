@@ -6,6 +6,7 @@ import {
   CategoryOutput,
   CategoryOutputMapper,
 } from "../common/category-output";
+import { CreateCategoryInput } from "./create-category.input";
 
 export class CreateCategoryUseCase
   implements IUseCase<CreateCategoryInput, CreateCategoryOutput>
@@ -26,11 +27,5 @@ export class CreateCategoryUseCase
     return CategoryOutputMapper.toOutput(entity);
   }
 }
-
-export type CreateCategoryInput = {
-  name: string;
-  description?: string | null;
-  isActive?: boolean;
-};
 
 export type CreateCategoryOutput = CategoryOutput;
