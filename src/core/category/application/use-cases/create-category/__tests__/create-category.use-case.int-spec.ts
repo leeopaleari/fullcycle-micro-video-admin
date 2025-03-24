@@ -2,7 +2,7 @@ import { CategorySequelizeRepository } from "@core/category/infra/db/sequelize/c
 import { CategoryModel } from "@core/category/infra/db/sequelize/category.model";
 import { Uuid } from "@core/shared/domain/value-objects/uuid.vo";
 import { setupSequelize } from "@core/shared/infra/testing/helpers";
-import { CreateCategoryUseCase } from "../../create-category.use-case";
+import { CreateCategoryUseCase } from "../../create-category/create-category.use-case";
 
 describe("CreateCategoryUseCase Integration Test", () => {
   let useCase: CreateCategoryUseCase;

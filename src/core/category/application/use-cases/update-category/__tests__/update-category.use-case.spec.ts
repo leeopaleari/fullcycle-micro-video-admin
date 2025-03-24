@@ -5,7 +5,7 @@ import {
   InvalidUuidError,
   Uuid,
 } from "@core/shared/domain/value-objects/uuid.vo";
-import { UpdateCategoryUseCase } from "../../update-category.use-case";
+import { UpdateCategoryUseCase } from "../update-category.use-case";
 
 describe("UpdateCategoryUseCase Unit Tests", () => {
   let useCase: UpdateCategoryUseCase;

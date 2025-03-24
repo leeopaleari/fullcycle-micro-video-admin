@@ -10,7 +10,10 @@ import {
 } from "@core/shared/application/pagination-output";
 import { IUseCase } from "@core/shared/application/use-case.interface";
 import { SortDirection } from "@core/shared/domain/repository/search-params";
-import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
+import {
+  CategoryOutput,
+  CategoryOutputMapper,
+} from "../common/category-output";
 
 export class ListCategoriesUseCase
   implements IUseCase<ListCategoriesInput, ListCategoriesOutput>

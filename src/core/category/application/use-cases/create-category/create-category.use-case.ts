@@ -1,8 +1,11 @@
 import { IUseCase } from "@core/shared/application/use-case.interface";
 import { EntityValidationError } from "@core/shared/domain/validators/validation.error";
-import { Category } from "../../domain/category.entity";
-import { ICategoryRepository } from "../../domain/category.repository";
-import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
+import { Category } from "../../../domain/category.entity";
+import { ICategoryRepository } from "../../../domain/category.repository";
+import {
+  CategoryOutput,
+  CategoryOutputMapper,
+} from "../common/category-output";
 
 export class CreateCategoryUseCase
   implements IUseCase<CreateCategoryInput, CreateCategoryOutput>

@@ -3,7 +3,7 @@ import { CategorySequelizeRepository } from "@core/category/infra/db/sequelize/c
 import { CategoryModel } from "@core/category/infra/db/sequelize/category.model";
 import { setupSequelize } from "@core/shared/infra/testing/helpers";
 import { CategoryOutputMapper } from "../../common/category-output";
-import { ListCategoriesUseCase } from "../../list-category.use-case";
+import { ListCategoriesUseCase } from "../list-category.use-case";
 
 describe("ListCategoriesUseCase Integration Tests", () => {
   let useCase: ListCategoriesUseCase;

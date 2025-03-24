@@ -4,7 +4,7 @@ import { CategoryModel } from "@core/category/infra/db/sequelize/category.model"
 import { NotFoundError } from "@core/shared/domain/errors/not-found.error";
 import { Uuid } from "@core/shared/domain/value-objects/uuid.vo";
 import { setupSequelize } from "@core/shared/infra/testing/helpers";
-import { GetCategoryUseCase } from "../../get-category.use-case";
+import { GetCategoryUseCase } from "../get-category.use-case";
 
 describe("GetCategoryUseCase Integration Tests", () => {
   let useCase: GetCategoryUseCase;

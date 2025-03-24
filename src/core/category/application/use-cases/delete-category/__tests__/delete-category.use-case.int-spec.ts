@@ -4,7 +4,7 @@ import { CategoryModel } from "@core/category/infra/db/sequelize/category.model"
 import { NotFoundError } from "@core/shared/domain/errors/not-found.error";
 import { Uuid } from "@core/shared/domain/value-objects/uuid.vo";
 import { setupSequelize } from "@core/shared/infra/testing/helpers";
-import { DeleteCategoryUseCase } from "../../delete-category.use-case";
+import { DeleteCategoryUseCase } from "../delete-category.use-case";
 
 describe("DeleteCategoryUseCase Integration Tests", () => {
   let useCase: DeleteCategoryUseCase;

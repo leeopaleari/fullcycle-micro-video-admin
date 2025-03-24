@@ -1,9 +1,12 @@
+import { Category } from "@core/category/domain/category.entity";
+import { ICategoryRepository } from "@core/category/domain/category.repository";
 import { IUseCase } from "@core/shared/application/use-case.interface";
 import { NotFoundError } from "@core/shared/domain/errors/not-found.error";
 import { Uuid } from "@core/shared/domain/value-objects/uuid.vo";
-import { Category } from "../../domain/category.entity";
-import { ICategoryRepository } from "../../domain/category.repository";
-import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
+import {
+  CategoryOutput,
+  CategoryOutputMapper,
+} from "../common/category-output";
 
 export class GetCategoryUseCase
   implements IUseCase<GetCategoryInput, GetCategoryOutput>
