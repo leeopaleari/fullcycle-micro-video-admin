@@ -1,8 +1,9 @@
 import { IUseCase } from "@core/shared/application/use-case.interface";
 import { NotFoundError } from "@core/shared/domain/errors/not-found.error";
 import { Uuid } from "@core/shared/domain/value-objects/uuid.vo";
-import { Category } from "../domain/category.entity";
-import { ICategoryRepository } from "../domain/category.repository";
+import { Category } from "../../domain/category.entity";
+import { ICategoryRepository } from "../../domain/category.repository";
+import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
 
 export class UpdateCategoryUseCase
   implements IUseCase<UpdateCategoryInput, UpdateCategoryOutput>
@@ -34,13 +35,7 @@ export class UpdateCategoryUseCase
 
     await this.categoryRepo.update(category);
 
-    return {
-      id: category.categoryId.id,
-      name: category.name,
-      description: category.description,
-      isActive: category.isActive,
-      createdAt: category.createdAt,
-    };
+    return CategoryOutputMapper.toOutput(category);
   }
 }
 
@@ -51,10 +46,4 @@ export type UpdateCategoryInput = {
   isActive?: boolean;
 };
 
-export type UpdateCategoryOutput = {
-  id: string;
-  name: string;
-  description: string;
-  isActive: boolean;
-  createdAt: Date;
-};
+export type UpdateCategoryOutput = CategoryOutput;

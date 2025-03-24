@@ -1,6 +1,7 @@
 import { IUseCase } from "@core/shared/application/use-case.interface";
-import { Category } from "../domain/category.entity";
-import { ICategoryRepository } from "../domain/category.repository";
+import { Category } from "../../domain/category.entity";
+import { ICategoryRepository } from "../../domain/category.repository";
+import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
 
 export class CreateCategoryUseCase
   implements IUseCase<CreateCategoryInput, CreateCategoryOutput>
@@ -14,13 +15,7 @@ export class CreateCategoryUseCase
 
     // A ideia de criar um novo objeto é desacoplar ao máximo a camada externa da minha camada de dominio
     // por isso não é retornado o objeto entity diretamente
-    return {
-      id: entity.categoryId.id,
-      name: entity.name,
-      description: entity.description,
-      isActive: entity.isActive,
-      createdAt: entity.createdAt,
-    };
+    return CategoryOutputMapper.toOutput(entity);
   }
 }
 
@@ -30,10 +25,4 @@ export type CreateCategoryInput = {
   isActive?: boolean;
 };
 
-export type CreateCategoryOutput = {
-  id: string;
-  name: string;
-  description?: string | null;
-  isActive?: boolean;
-  createdAt: Date;
-};
+export type CreateCategoryOutput = CategoryOutput;
