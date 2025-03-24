@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --runInBand --ci"
+    "test": "jest --runInBand --ci",
+    "tsc:check": "tsc --noEmit -p tsconfig.json"
   },
   "keywords": [],
   "author": "",
