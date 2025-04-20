@@ -3,17 +3,17 @@ import {
   CategorySearchParams,
   CategorySearchResult,
   ICategoryRepository,
-} from "@core/category/domain/category.repository";
+} from '@core/category/domain/category.repository';
 import {
   PaginationOutput,
   PaginationOutputMapper,
-} from "@core/shared/application/pagination-output";
-import { IUseCase } from "@core/shared/application/use-case.interface";
-import { SortDirection } from "@core/shared/domain/repository/search-params";
+} from '@core/shared/application/pagination-output';
+import { IUseCase } from '@core/shared/application/use-case.interface';
+import { SortDirection } from '@core/shared/domain/repository/search-params';
 import {
   CategoryOutput,
   CategoryOutputMapper,
-} from "../common/category-output";
+} from '../common/category-output';
 
 export class ListCategoriesUseCase
   implements IUseCase<ListCategoriesInput, ListCategoriesOutput>

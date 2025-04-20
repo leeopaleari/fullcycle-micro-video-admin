@@ -1,5 +1,5 @@
-import { Sequelize, SequelizeOptions } from "sequelize-typescript";
-import { Config } from "../config";
+import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
+import { Config } from '../config';
 
 /**
  * Helper para configurar o Sequelize em testes

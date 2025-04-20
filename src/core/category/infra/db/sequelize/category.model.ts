@@ -4,7 +4,7 @@ import {
   Model,
   PrimaryKey,
   Table,
-} from "sequelize-typescript";
+} from 'sequelize-typescript';
 
 export type CategoryModelProps = {
   categoryId: string;
@@ -13,7 +13,7 @@ export type CategoryModelProps = {
   isActive: boolean;
   createdAt: Date;
 };
-@Table({ tableName: "categories" })
+@Table({ tableName: 'categories' })
 export class CategoryModel extends Model<CategoryModelProps> {
   @PrimaryKey
   @Column({ type: DataType.UUID })

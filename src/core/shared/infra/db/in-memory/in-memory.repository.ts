@@ -1,19 +1,19 @@
-import { Entity } from "@core/shared/domain/entity";
-import { NotFoundError } from "@core/shared/domain/errors/not-found.error";
+import { Entity } from '@core/shared/domain/entity';
+import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 import {
   IRepository,
   ISearchableRepository,
-} from "@core/shared/domain/repository/repository.interface";
+} from '@core/shared/domain/repository/repository.interface';
 import {
   SearchParams,
   SortDirection,
-} from "@core/shared/domain/repository/search-params";
-import { SearchResult } from "@core/shared/domain/repository/search-result";
-import { ValueObject } from "@core/shared/domain/value-object";
+} from '@core/shared/domain/repository/search-params';
+import { SearchResult } from '@core/shared/domain/repository/search-result';
+import { ValueObject } from '@core/shared/domain/value-object';
 
 export abstract class InMemoryRepository<
   E extends Entity,
-  EntityId extends ValueObject
+  EntityId extends ValueObject,
 > implements IRepository<E, EntityId>
 {
   items: E[] = [];
@@ -28,7 +28,7 @@ export abstract class InMemoryRepository<
 
   async update(entity: E): Promise<void> {
     const indexFound = this.items.findIndex((item) =>
-      item.entityId.equals(entity.entityId)
+      item.entityId.equals(entity.entityId),
     );
 
     if (indexFound === -1) {
@@ -40,7 +40,7 @@ export abstract class InMemoryRepository<
 
   async delete(entityId: EntityId): Promise<void> {
     const indexFound = this.items.findIndex((item) =>
-      item.entityId.equals(entityId)
+      item.entityId.equals(entityId),
     );
 
     if (indexFound === -1) {
@@ -52,7 +52,7 @@ export abstract class InMemoryRepository<
 
   async findById(entityId: EntityId): Promise<E | null> {
     const item = this.items.find((item) => item.entityId.equals(entityId));
-    return typeof item === "undefined" ? null : item;
+    return typeof item === 'undefined' ? null : item;
   }
 
   async findAll(): Promise<any[]> {
@@ -65,7 +65,7 @@ export abstract class InMemoryRepository<
 export abstract class InMemorySearchableRepository<
     E extends Entity & Record<string, any>,
     EntityId extends ValueObject,
-    Filter = string
+    Filter = string,
   >
   extends InMemoryRepository<E, EntityId>
   implements ISearchableRepository<E, EntityId, Filter>
@@ -77,12 +77,12 @@ export abstract class InMemorySearchableRepository<
     const itemsSorted = this.applySort(
       itemsFiltered,
       props.sort,
-      props.sort_dir
+      props.sort_dir,
     );
     const itemsPaginated = this.applyPaginate(
       itemsSorted,
       props.page,
-      props.per_page
+      props.per_page,
     );
 
     return new SearchResult({
@@ -95,13 +95,13 @@ export abstract class InMemorySearchableRepository<
 
   protected abstract applyFilter(
     items: E[],
-    filter: Filter | null
+    filter: Filter | null,
   ): Promise<E[]>;
 
   protected applyPaginate(
     items: E[],
-    page: SearchParams["page"],
-    per_page: SearchParams["per_page"]
+    page: SearchParams['page'],
+    per_page: SearchParams['per_page'],
   ) {
     const start = (page - 1) * per_page;
     const end = start + per_page;
@@ -113,7 +113,7 @@ export abstract class InMemorySearchableRepository<
     items: E[],
     sort: string | null,
     sort_dir: SortDirection | null,
-    custom_getter?: (sort: string, item: E) => any
+    custom_getter?: (sort: string, item: E) => any,
   ) {
     if (!sort || !this.sortableFields.includes(sort)) {
       return items;
@@ -124,11 +124,11 @@ export abstract class InMemorySearchableRepository<
       const bValue = custom_getter ? custom_getter(sort, b) : b[sort];
 
       if (aValue < bValue) {
-        return sort_dir === "asc" ? -1 : 1;
+        return sort_dir === 'asc' ? -1 : 1;
       }
 
       if (aValue > bValue) {
-        return sort_dir === "asc" ? 1 : -1;
+        return sort_dir === 'asc' ? 1 : -1;
       }
 
       return 0;
