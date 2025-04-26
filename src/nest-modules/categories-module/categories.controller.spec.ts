@@ -1,7 +1,7 @@
 import { ConfigService } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
-import { ConfigModule } from '../config/config.module';
-import { DatabaseModule } from '../database/database.module';
+import { ConfigModule } from '../config-module/config.module';
+import { DatabaseModule } from '../database-module/database.module';
 import { CategoriesController } from './categories.controller';
 import { CategoriesModule } from './categories.module';
 
