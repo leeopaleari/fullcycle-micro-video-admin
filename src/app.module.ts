@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { CategoriesModule } from './nest-modules/categories-module/categories.module';
+import { ConfigModule } from './nest-modules/config/config.module';
 import { DatabaseModule } from './nest-modules/database/database.module';
 
 @Module({
-  imports: [CategoriesModule, DatabaseModule],
+  imports: [ConfigModule.forRoot(), DatabaseModule, CategoriesModule],
   controllers: [],
   providers: [],
 })
