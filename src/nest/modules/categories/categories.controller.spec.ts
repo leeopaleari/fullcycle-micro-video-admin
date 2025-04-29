@@ -1,4 +1,3 @@
-import { ConfigService } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
 import { ConfigModule } from '../config/config.module';
 import { DatabaseModule } from '../database/database.module';
@@ -14,11 +13,9 @@ describe('CategoriesController', () => {
     }).compile();
 
     controller = module.get<CategoriesController>(CategoriesController);
-    console.log(module.get(ConfigService));
   });
 
   it('should be defined', () => {
-    console.log('controller', controller);
     expect(controller).toBeDefined();
   });
 });
