@@ -42,4 +42,5 @@ export type ListCategoriesInput = {
   sort_dir?: SortDirection | null;
   filter?: CategoryFilter | null;
 };
+
 export type ListCategoriesOutput = PaginationOutput<CategoryOutput>;

@@ -22,6 +22,7 @@ export class UpdateCategoryUseCase
       throw new NotFoundError(input.id, Category);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     input.name && category.changeName(input.name);
 
     // É feito dessa forma, por description ser opcional, precisa primeiro verificar se ela existe no objeto input
