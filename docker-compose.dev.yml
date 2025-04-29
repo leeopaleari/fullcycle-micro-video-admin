@@ -14,14 +14,17 @@ services:
       filebeat_collector: true
 
   db:
-    image: arm64v8/mysql:lts
+    image: postgres:latest
     environment:
-      - MYSQL_DATABASE=micro_videos
-      - MYSQL_ROOT_PASSWORD=root
+      - POSTGRES_DB=micro_videos
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
     volumes:
-      - ./.docker/dbdata:/var/lib/mysql:delegated
-    security_opt:
-      - seccomp:unconfined
+      - ./.docker/pgdata:/var/lib/postgresql/data:delegated
+    ports:
+      - 5432:5432
+    # security_opt: # Kept commented out, uncomment if needed and compatible
+    #   - seccomp:unconfined
 
   # rabbitmq:
   #   build: ./.docker/rabbitmq

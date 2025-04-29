@@ -14,13 +14,14 @@ services:
       filebeat_collector: true
 
   db:
-    image: arm64v8/mysql:lts
+    image: postgres:latest # Changed from mysql
     environment:
-      - MYSQL_DATABASE=micro_videos
-      - MYSQL_ROOT_PASSWORD=root
-    # volumes:
-    #   - ./.docker/mysql:/docker-entrypoint-initdb.d
+      POSTGRES_DB: micro_videos # Changed from MYSQL_DATABASE
+      POSTGRES_USER: postgres # Added default user
+      POSTGRES_PASSWORD: root # Changed from MYSQL_ROOT_PASSWORD
+    ports:
+      - 5432:5432 # Optional: Expose postgres port if needed externally
     tmpfs:
-      - /var/lib/mysql
-    security_opt:
-      - seccomp:unconfined
+      - /var/lib/postgresql/data # Added tmpfs for postgres data directory
+    # security_opt: # This was likely specific to the previous mysql setup, usually not needed for postgres
+    #   - seccomp:unconfined

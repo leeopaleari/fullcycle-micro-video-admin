@@ -36,6 +36,20 @@ const models = [CategoryModel];
           };
         }
 
+        if (dbVendor === 'postgres') {
+          return {
+            dialect: 'postgres',
+            host: configService.get('DB_HOST'),
+            port: configService.get('DB_PORT'),
+            username: configService.get('DB_USERNAME'),
+            password: configService.get('DB_PASSWORD'),
+            database: configService.get('DB_DATABASE'),
+            logging: configService.get('DB_LOGGING'),
+            autoLoadModels: configService.get('DB_AUTO_LOAD_MODELS'),
+            models,
+          };
+        }
+
         throw new Error(`Unsupported database configuration: ${dbVendor}`);
       },
       inject: [ConfigService],
