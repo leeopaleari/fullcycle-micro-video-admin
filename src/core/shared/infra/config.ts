@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { config as readEnv } from 'dotenv';
 import { join } from 'path';
 
@@ -23,6 +26,7 @@ export class Config {
   static googleCredentials() {
     Config.readEnv();
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return JSON.parse(Config.env.GOOGLE_CLOUD_CREDENTIALS);
   }
 

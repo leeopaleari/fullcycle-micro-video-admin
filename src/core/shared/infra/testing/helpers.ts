@@ -13,7 +13,7 @@ export function setupSequelize(options: SequelizeOptions = {}) {
   // Variável que armazenará a instância do Sequelize, inicializada no beforeAll
   let _sequelize: Sequelize;
 
-  beforeAll(async () => {
+  beforeAll(() => {
     _sequelize = new Sequelize({
       ...Config.db(),
       ...options,

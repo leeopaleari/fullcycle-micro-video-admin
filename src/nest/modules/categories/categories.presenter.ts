@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { ListCategoriesOutput } from '@core/category/application/use-cases';
 import { CategoryOutput } from '@core/category/application/use-cases/common/category-output';
 import { Transform } from 'class-transformer';
